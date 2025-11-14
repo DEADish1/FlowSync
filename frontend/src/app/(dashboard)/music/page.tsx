@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { MusicRecommendations } from '@/components/music/MusicRecommendations';
+import { SunoPrompt } from '@/components/music/SunoPrompt';
 
 export default function MusicPage() {
   return (
@@ -12,15 +13,14 @@ export default function MusicPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Music Recommendations</CardTitle>
-          <CardDescription>Playlists matched to your mood and energy</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-500">Music recommendations coming soon...</p>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <MusicRecommendations />
+        </div>
+        <div>
+          <SunoPrompt />
+        </div>
+      </div>
     </div>
   );
 }

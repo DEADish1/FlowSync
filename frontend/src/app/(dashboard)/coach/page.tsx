@@ -1,6 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { DailyTip } from '@/components/coach/DailyTip';
+import { InsightsList } from '@/components/coach/InsightsList';
+import { AskCoach } from '@/components/coach/AskCoach';
 
 export default function CoachPage() {
   return (
@@ -12,15 +14,16 @@ export default function CoachPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Your Insights</CardTitle>
-          <CardDescription>AI-powered coaching based on your patterns</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-500">AI coach insights coming soon...</p>
-        </CardContent>
-      </Card>
+      <DailyTip />
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <InsightsList />
+        </div>
+        <div>
+          <AskCoach />
+        </div>
+      </div>
     </div>
   );
 }

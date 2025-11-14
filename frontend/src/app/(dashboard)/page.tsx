@@ -2,11 +2,30 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Activity, CheckSquare, Zap, TrendingUp } from 'lucide-react';
+import { Activity, CheckSquare, Zap, TrendingUp, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { useMood } from '@/hooks/useMood';
+import { useTasks } from '@/hooks/useTasks';
+import { useFlowBlock } from '@/hooks/useFlowBlock';
+import { useCoach } from '@/hooks/useCoach';
+
+const energyVariants: Record<string, 'success' | 'warning' | 'danger'> = {
+  high: 'success',
+  neutral: 'warning',
+  low: 'danger',
+};
 
 export default function DashboardPage() {
+  const { currentEnergy } = useMood();
+  const { tasks } = useTasks();
+  const { activeBlockType } = useFlowBlock();
+  const { dailyTip } = useCoach();
+
+  const pendingTasks = tasks?.filter(t => t.status === 'pending') || [];
+  const completedTasks = tasks?.filter(t => t.status === 'completed') || [];
+  const inProgressTasks = tasks?.filter(t => t.status === 'in_progress') || [];
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -27,9 +46,11 @@ export default function DashboardPage() {
             <Activity className="h-4 w-4 text-gray-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">Neutral</div>
-            <Badge variant="warning" className="mt-2">
-              Check in now
+            <div className="text-2xl font-bold capitalize">
+              {currentEnergy || 'Unknown'}
+            </div>
+            <Badge variant={currentEnergy ? energyVariants[currentEnergy] : 'default'} className="mt-2">
+              {currentEnergy ? 'Tracked' : 'Check in now'}
             </Badge>
           </CardContent>
         </Card>
@@ -37,13 +58,17 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">
-              Tasks Today
+              Tasks
             </CardTitle>
             <CheckSquare className="h-4 w-4 text-gray-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0 / 0</div>
-            <p className="text-xs text-gray-500 mt-2">No tasks yet</p>
+            <div className="text-2xl font-bold">
+              {completedTasks.length} / {tasks?.length || 0}
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              {pendingTasks.length} pending, {inProgressTasks.length} in progress
+            </p>
           </CardContent>
         </Card>
 
@@ -55,21 +80,31 @@ export default function DashboardPage() {
             <Zap className="h-4 w-4 text-gray-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">None</div>
-            <p className="text-xs text-gray-500 mt-2">Start a flow block</p>
+            <div className="text-2xl font-bold capitalize">
+              {activeBlockType ? activeBlockType.replace('-', ' ') : 'None'}
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              {activeBlockType ? 'In session' : 'Start a flow block'}
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">
-              Productivity Score
+              Completion Rate
             </CardTitle>
             <TrendingUp className="h-4 w-4 text-gray-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
-            <p className="text-xs text-gray-500 mt-2">Track your energy</p>
+            <div className="text-2xl font-bold">
+              {tasks && tasks.length > 0
+                ? Math.round((completedTasks.length / tasks.length) * 100)
+                : 0}%
+            </div>
+            <p className="text-xs text-gray-500 mt-2">
+              {tasks && tasks.length > 0 ? 'Keep it up!' : 'Create tasks to track'}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -114,16 +149,16 @@ export default function DashboardPage() {
       </Card>
 
       {/* AI Coach Insight */}
-      <Card>
+      <Card className="border-2 border-yellow-200 bg-yellow-50">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-yellow-500" />
+          <CardTitle className="flex items-center gap-2 text-yellow-900">
+            <Sparkles className="h-5 w-5" />
             Daily Tip
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-700">
-            Start tracking your energy levels to get personalized productivity insights!
+            {dailyTip || 'Start tracking your energy levels to get personalized productivity insights!'}
           </p>
           <Link href="/dashboard/coach">
             <Button variant="ghost" className="mt-4">

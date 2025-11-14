@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { EnergyHeatmap } from '@/components/energy/EnergyHeatmap';
+import { BestTimes } from '@/components/energy/BestTimes';
 
 export default function EnergyPage() {
   return (
@@ -12,15 +13,14 @@ export default function EnergyPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Your Energy Patterns</CardTitle>
-          <CardDescription>Track when you perform best</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-500">Energy map visualization coming soon...</p>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <EnergyHeatmap />
+        </div>
+        <div>
+          <BestTimes />
+        </div>
+      </div>
     </div>
   );
 }
