@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { MoodInput } from '@/components/mood/MoodInput';
+import { MoodHistory } from '@/components/mood/MoodHistory';
 
 export default function MoodPage() {
   return (
@@ -12,15 +13,10 @@ export default function MoodPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>How are you feeling?</CardTitle>
-          <CardDescription>Describe your current mood and energy level</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-500">Mood input component coming soon...</p>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <MoodInput />
+        <MoodHistory />
+      </div>
     </div>
   );
 }
