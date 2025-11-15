@@ -1,5 +1,5 @@
-# Multi-stage build for production
-FROM node:18-alpine AS builder
+# Multi-stage build for FlowSync Backend
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -19,7 +19,12 @@ COPY src ./src
 RUN npm run build
 
 # Production stage
-FROM node:18-alpine
+FROM node:20-alpine
+
+# Add metadata
+LABEL maintainer="FlowSync Team"
+LABEL description="FlowSync Backend API Server"
+LABEL version="1.0.0"
 
 # Set NODE_ENV
 ENV NODE_ENV=production

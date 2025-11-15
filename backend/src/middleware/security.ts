@@ -1,5 +1,6 @@
 import helmet from 'helmet';
-import { Express } from 'express';
+import { Express, Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import { config } from '../utils/config';
 
 /**
@@ -12,20 +13,51 @@ export function applySecurity(app: Express) {
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
-          styleSrc: ["'self'", "'unsafe-inline'"],
-          scriptSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https:'],
+          scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
           imgSrc: ["'self'", 'data:', 'https:'],
           connectSrc: ["'self'", config.frontend.url],
-          fontSrc: ["'self'"],
+          fontSrc: ["'self'", 'https:', 'data:'],
           objectSrc: ["'none'"],
           mediaSrc: ["'self'"],
           frameSrc: ["'none'"],
         },
       },
+      hsts: {
+        maxAge: 31536000, // 1 year
+        includeSubDomains: true,
+        preload: true,
+      },
+      frameguard: { action: 'deny' },
+      noSniff: true,
+      xssFilter: true,
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
       crossOriginEmbedderPolicy: false,
       crossOriginResourcePolicy: { policy: 'cross-origin' },
     })
   );
+
+  // CORS configuration
+  const allowedOrigins = [
+    config.frontend.url,
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ];
+
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID'],
+    exposedHeaders: ['X-Request-ID'],
+    maxAge: 86400,
+  }));
 
   // Disable X-Powered-By header
   app.disable('x-powered-by');
@@ -34,6 +66,39 @@ export function applySecurity(app: Express) {
   if (config.nodeEnv === 'production') {
     app.set('trust proxy', 1);
   }
+}
+
+/**
+ * HTTPS Redirect Middleware (production only)
+ */
+export function httpsRedirect(req: Request, res: Response, next: NextFunction) {
+  if (config.nodeEnv === 'production' && !req.secure && req.get('x-forwarded-proto') !== 'https') {
+    return res.redirect(301, `https://${req.get('host')}${req.url}`);
+  }
+  next();
+}
+
+/**
+ * Request Sanitization Middleware
+ */
+export function sanitizeRequest(req: Request, res: Response, next: NextFunction) {
+  if (req.query) {
+    Object.keys(req.query).forEach(key => {
+      if (typeof req.query[key] === 'string') {
+        req.query[key] = (req.query[key] as string).replace(/\0/g, '').trim();
+      }
+    });
+  }
+
+  if (req.body && typeof req.body === 'object') {
+    Object.keys(req.body).forEach(key => {
+      if (typeof req.body[key] === 'string') {
+        req.body[key] = req.body[key].replace(/\0/g, '').trim();
+      }
+    });
+  }
+
+  next();
 }
 
 /**
