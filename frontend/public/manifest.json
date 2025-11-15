@@ -1,0 +1,63 @@
+{
+  "name": "FlowSync - Adaptive Life-Timing AI",
+  "short_name": "FlowSync",
+  "description": "Manage your energy, not just your time. AI-powered productivity app with mood tracking, smart scheduling, and personalized coaching.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0E27",
+  "theme_color": "#2E7CFF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "health"],
+  "shortcuts": [
+    {
+      "name": "Quick Mood Check",
+      "short_name": "Mood",
+      "description": "Log your current mood and energy level",
+      "url": "/dashboard/mood",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "View Tasks",
+      "short_name": "Tasks",
+      "description": "See your task list",
+      "url": "/dashboard/tasks",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "AI Coach",
+      "short_name": "Coach",
+      "description": "Get AI-powered productivity insights",
+      "url": "/dashboard/coach",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
