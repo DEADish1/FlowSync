@@ -261,7 +261,9 @@ export class NotificationService {
       [notification.userId]
     );
 
-    if (result.rows.length === 0) {
+    const subscriptions = Array.isArray(result?.rows) ? result.rows : [];
+
+    if (subscriptions.length === 0) {
       // No subscriptions, skip browser notification
       return;
     }

@@ -20,7 +20,7 @@ FlowSync doesn't just manage time — it manages your energy.
 
 ## 📚 Getting Started
 
-See [BUILD_GUIDE.md](./BUILD_GUIDE.md) for complete setup and implementation instructions.
+See [BUILD_GUIDE.md](./docs/guides/BUILD_GUIDE.md) for complete setup and implementation instructions.
 
 ### Quick Start
 
@@ -66,8 +66,8 @@ See [BUILD_GUIDE.md](./BUILD_GUIDE.md) for complete setup and implementation ins
 
 ## 📖 Documentation
 
-- [Build Guide](./BUILD_GUIDE.md) - Complete implementation guide
-- [API Documentation](./docs/API.md) - API endpoints reference
+- [Build Guide](./docs/guides/BUILD_GUIDE.md) - Complete implementation guide
+- [API Documentation](./docs/api/API_DOCUMENTATION.md) - API endpoints reference
 - [Database Schema](./database/schema.sql) - Database structure
 
 ## 🧪 Testing
@@ -85,7 +85,7 @@ npm run test:e2e
 
 ## 🚀 Deployment
 
-See [BUILD_GUIDE.md](./BUILD_GUIDE.md#-phase-4-polish--deploy) for deployment instructions.
+See [BUILD_GUIDE.md](./docs/guides/BUILD_GUIDE.md#-phase-4-polish--deploy) for deployment instructions.
 
 ## 📝 License
 

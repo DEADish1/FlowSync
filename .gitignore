@@ -13,6 +13,21 @@ dist/
 .next/
 out/
 
+# Frontend build artifacts
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+frontend/.vercel/
+frontend/dist/
+frontend/build/
+frontend/coverage/
+
+# Backend build artifacts
+backend/dist/
+backend/build/
+backend/coverage/
+backend/logs/*.log
+
 # Environment variables
 .env
 .env.local

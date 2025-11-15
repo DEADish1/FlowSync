@@ -36,10 +36,10 @@ Phase 1 setup has been completed! All necessary files, dependencies, and documen
 - All with sensible defaults for development
 
 ### 5. Documentation Created ✅
-- **BUILD_GUIDE.md** - Comprehensive implementation guide (1131 lines)
+- **[BUILD_GUIDE.md](../guides/BUILD_GUIDE.md)** - Comprehensive implementation guide (1131 lines)
 - **DEVELOPMENT_STATUS.md** - Current project status (303 lines)
-- **SETUP_MANUAL.md** - Manual setup without Docker
-- **QUICKSTART.md** - Get running in 5 minutes
+- **[SETUP_MANUAL.md](../guides/SETUP_MANUAL.md)** - Manual setup without Docker
+- **[QUICKSTART.md](../guides/QUICKSTART.md)** - Get running in 5 minutes
 - **setup-phase1.sh** - Automated setup script
 - **README.md** - Project overview
 
@@ -99,7 +99,7 @@ cd frontend && npm run dev
 ```
 
 ### Manual Start (Without Docker)
-See [SETUP_MANUAL.md](./SETUP_MANUAL.md)
+See [SETUP_MANUAL.md](../guides/SETUP_MANUAL.md)
 
 ## 📊 Statistics
 
@@ -130,7 +130,7 @@ See [SETUP_MANUAL.md](./SETUP_MANUAL.md)
 **Note:** The current environment does not have Docker available. For local development:
 
 1. **With Docker:** Run `./setup-phase1.sh` to auto-configure everything
-2. **Without Docker:** Follow [SETUP_MANUAL.md](./SETUP_MANUAL.md) for manual setup
+2. **Without Docker:** Follow [SETUP_MANUAL.md](../guides/SETUP_MANUAL.md) for manual setup
 
 ## 🔑 API Keys (Optional)
 
@@ -205,10 +205,10 @@ Phase 1 is complete! Ready for:
 
 ## 🔗 Related Documentation
 
-- [BUILD_GUIDE.md](./BUILD_GUIDE.md) - Full implementation details
-- [QUICKSTART.md](./QUICKSTART.md) - Get running fast
-- [SETUP_MANUAL.md](./SETUP_MANUAL.md) - Manual setup guide
-- [DEVELOPMENT_STATUS.md](./DEVELOPMENT_STATUS.md) - Project status
+- [BUILD_GUIDE.md](../guides/BUILD_GUIDE.md) - Full implementation details
+- [QUICKSTART.md](../guides/QUICKSTART.md) - Get running fast
+- [SETUP_MANUAL.md](../guides/SETUP_MANUAL.md) - Manual setup guide
+- [DEVELOPMENT_STATUS.md](../guides/DEVELOPMENT_STATUS.md) - Project status
 - [README.md](./README.md) - Project overview
 
 ---

@@ -174,7 +174,11 @@ describe('NotificationService', () => {
 
   describe('notifyAchievement', () => {
     it('should send immediate achievement notification', async () => {
-      const mockNotification = createMockNotification({ type: 'achievement_unlocked' });
+      const mockNotification = createMockNotification({
+        type: 'achievement_unlocked',
+        title: '🎉 Achievement Unlocked!',
+        message: 'Early Bird: Completed 5 tasks before 9 AM',
+      });
       mockPool.query.mockResolvedValueOnce(createMockQueryResult([mockNotification]));
 
       const result = await service.notifyAchievement(

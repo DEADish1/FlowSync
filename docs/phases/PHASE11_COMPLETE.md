@@ -748,7 +748,7 @@ cd frontend && pm2 start npm -- start
 
 ### Internal Documentation
 - `DEPLOYMENT.md` - Deployment procedures
-- `TESTING.md` - Testing guide
+- [TESTING.md](../guides/TESTING.md) - Testing guide
 - `PHASE11_PLAN.md` - Architecture planning
 
 ### External Resources

@@ -223,7 +223,7 @@ NEXT_PUBLIC_API_URL: http://localhost:3001
 
 ### 6. Test Documentation ✅
 
-**Guide**: `TESTING.md`
+**Guide**: [TESTING.md](../guides/TESTING.md)
 
 Comprehensive testing documentation:
 
@@ -288,7 +288,7 @@ npm test -- -u              # Update snapshots
 
 ### CI/CD & Documentation (4 files)
 9. `.github/workflows/tests.yml` - GitHub Actions workflow
-10. `TESTING.md` - Testing guide
+10. [TESTING.md](../guides/TESTING.md) - Testing guide
 11. `PHASE10_PLAN.md` - Phase planning document
 12. `PHASE10_COMPLETE.md` - This file
 

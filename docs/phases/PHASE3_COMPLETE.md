@@ -245,7 +245,7 @@ CSV:  flowsync-data-tasks-2025-11-15.csv
 ### 8. API Documentation ✅
 
 **Files Created:**
-- `API_DOCUMENTATION.md` - Complete API reference
+- [API_DOCUMENTATION.md](../api/API_DOCUMENTATION.md) - Complete API reference
 
 **Documentation Includes:**
 - Full endpoint catalog (50+ endpoints)
@@ -357,7 +357,7 @@ frontend/src/
     └── export.ts ✨
 
 docs/
-└── API_DOCUMENTATION.md ✨
+└── [API_DOCUMENTATION.md](../api/API_DOCUMENTATION.md) ✨
 
 ✨ = Created in Phase 3
 ```
