@@ -45,4 +45,33 @@ export class CoachController {
       next(error);
     }
   }
+
+  async getDailyBriefing(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+
+      const briefing = await aiCoach.generateDailyBriefing(userId);
+
+      res.json(briefing);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async breakdownTask(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+      const { title, description } = req.body;
+
+      if (!title) {
+        return res.status(400).json({ error: 'Task title is required' });
+      }
+
+      const breakdown = await aiCoach.breakdownTask(userId, title, description);
+
+      res.json(breakdown);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

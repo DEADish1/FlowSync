@@ -98,5 +98,8 @@ export const analyticsAPI = {
 export const coachAPI = {
   getInsights: () => api.get('/coach/insights'),
   getDailyTip: () => api.get('/coach/daily-tip'),
+  getDailyBriefing: () => api.get('/coach/briefing'),
   askQuestion: (question: string) => api.post('/coach/ask', { question }),
+  breakdownTask: (title: string, description?: string) =>
+    api.post('/coach/breakdown', { title, description }),
 };
