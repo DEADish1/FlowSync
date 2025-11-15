@@ -9,6 +9,7 @@ import { useMood } from '@/hooks/useMood';
 import { useTasks } from '@/hooks/useTasks';
 import { useFlowBlock } from '@/hooks/useFlowBlock';
 import { useCoach } from '@/hooks/useCoach';
+import { StreakCard } from '@/components/dashboard/StreakCard';
 
 const energyVariants: Record<string, 'success' | 'warning' | 'danger'> = {
   high: 'success',
@@ -30,8 +31,8 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
           Welcome back! Here's an overview of your productivity.
         </p>
       </div>
@@ -109,6 +110,9 @@ export default function DashboardPage() {
         </Card>
       </div>
 
+      {/* Streak Tracker */}
+      <StreakCard currentStreak={5} longestStreak={12} totalDays={45} />
+
       {/* Quick Actions */}
       <Card>
         <CardHeader>
@@ -149,15 +153,15 @@ export default function DashboardPage() {
       </Card>
 
       {/* AI Coach Insight */}
-      <Card className="border-2 border-yellow-200 bg-yellow-50">
+      <Card className="border-2 border-yellow-200 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-900">
+          <CardTitle className="flex items-center gap-2 text-yellow-900 dark:text-yellow-300">
             <Sparkles className="h-5 w-5" />
             Daily Tip
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-700">
+          <p className="text-gray-700 dark:text-gray-300">
             {dailyTip || 'Start tracking your energy levels to get personalized productivity insights!'}
           </p>
           <Link href="/dashboard/coach">
