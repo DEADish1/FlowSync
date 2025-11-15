@@ -5,6 +5,8 @@ import { logger } from './utils/logger';
 import { testConnection, closePool } from './utils/db';
 import { connectRedis, disconnectRedis } from './utils/redis';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { applySecurity } from './middleware/security';
+import { globalRateLimiter, authRateLimiter } from './middleware/rateLimiter';
 
 // Import routes (will be created)
 import authRoutes from './routes/auth';
@@ -18,13 +20,24 @@ import coachRoutes from './routes/coach';
 
 const app: Express = express();
 
-// Middleware
+// Security middleware
+applySecurity(app);
+
+// CORS
 app.use(cors({
   origin: config.frontend.url,
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-RateLimit-Reset'],
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+// Body parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Global rate limiting
+app.use(globalRateLimiter);
 
 // Health check
 app.get('/health', (req, res) => {
@@ -36,7 +49,7 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRateLimiter, authRoutes);
 app.use('/api/mood', moodRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/schedule', scheduleRoutes);

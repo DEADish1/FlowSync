@@ -37,19 +37,59 @@ export const config = {
 
 // Validation
 export function validateConfig() {
+  const isProduction = config.nodeEnv === 'production';
+
+  // Required in all environments
   const required = [
     'DATABASE_URL',
     'JWT_SECRET',
   ];
 
+  // Required only in production
+  const productionRequired = [
+    'REDIS_URL',
+    'OPENAI_API_KEY',
+    'FRONTEND_URL',
+  ];
+
+  // Check required variables
   const missing = required.filter(key => !process.env[key]);
 
   if (missing.length > 0) {
-    console.warn(`⚠️  Missing environment variables: ${missing.join(', ')}`);
-    console.warn('⚠️  Using defaults for development. DO NOT use in production!');
+    if (isProduction) {
+      throw new Error(`❌ Missing required environment variables: ${missing.join(', ')}`);
+    } else {
+      console.warn(`⚠️  Missing environment variables: ${missing.join(', ')}`);
+      console.warn('⚠️  Using defaults for development. DO NOT use in production!');
+    }
   }
 
-  if (config.nodeEnv === 'production' && config.jwt.secret === 'dev-secret-change-in-production') {
-    throw new Error('❌ JWT_SECRET must be set in production!');
+  // Check production-only required variables
+  if (isProduction) {
+    const missingProd = productionRequired.filter(key => !process.env[key]);
+    if (missingProd.length > 0) {
+      throw new Error(`❌ Missing production environment variables: ${missingProd.join(', ')}`);
+    }
   }
+
+  // Validate specific values
+  if (isProduction) {
+    if (config.jwt.secret === 'dev-secret-change-in-production') {
+      throw new Error('❌ JWT_SECRET must be changed in production!');
+    }
+
+    if (config.jwt.secret.length < 32) {
+      throw new Error('❌ JWT_SECRET must be at least 32 characters in production!');
+    }
+
+    if (!config.database.url.includes('postgresql://')) {
+      console.warn('⚠️  DATABASE_URL should use postgresql:// protocol');
+    }
+
+    if (config.frontend.url.includes('localhost')) {
+      console.warn('⚠️  FRONTEND_URL should not be localhost in production');
+    }
+  }
+
+  console.log('✅ Configuration validated successfully');
 }
