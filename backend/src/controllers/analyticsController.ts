@@ -1,9 +1,11 @@
 import { Response, NextFunction } from 'express';
 import { AuthRequest } from '../middleware/auth';
 import { EnergyAnalyticsService } from '../services/energyAnalyticsService';
+import { AnalyticsService } from '../services/analyticsService';
 import { pool } from '../utils/db';
 
 const energyAnalytics = new EnergyAnalyticsService(pool);
+const analyticsService = new AnalyticsService();
 
 export class AnalyticsController {
   async getEnergyMap(req: AuthRequest, res: Response, next: NextFunction) {
@@ -66,6 +68,54 @@ export class AnalyticsController {
         totalTasks: parseInt(data.total_tasks),
         completionRate: Math.round(completionRate),
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getDashboard(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+
+      const analytics = await analyticsService.getDashboardAnalytics(userId);
+
+      res.json(analytics);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getWeeklyComparison(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+
+      const comparison = await analyticsService.getWeeklyComparison(userId);
+
+      res.json(comparison);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAchievements(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+
+      const achievements = await analyticsService.getAchievements(userId);
+
+      res.json({ achievements });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getStreaks(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user!.userId;
+
+      const streaks = await analyticsService.getStreakMetrics(userId);
+
+      res.json(streaks);
     } catch (error) {
       next(error);
     }
