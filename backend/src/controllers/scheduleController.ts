@@ -1,6 +1,9 @@
 import { Response, NextFunction } from 'express';
 import { AuthRequest } from '../middleware/auth';
 import { pool } from '../utils/db';
+import { ScheduleGeneratorService } from '../services/scheduleGeneratorService';
+
+const scheduleGenerator = new ScheduleGeneratorService();
 
 export class ScheduleController {
   async getSchedule(req: AuthRequest, res: Response, next: NextFunction) {
@@ -34,9 +37,15 @@ export class ScheduleController {
   async generateSchedule(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const userId = req.user!.userId;
-      // AI-powered schedule generation logic would go here
-      // For now, return a simple message
-      res.json({ message: 'Schedule generation not yet implemented' });
+      const date = req.body.date ? new Date(req.body.date) : new Date();
+
+      const schedule = await scheduleGenerator.generateOptimizedSchedule(userId, date);
+
+      res.json({
+        message: 'Schedule generated successfully',
+        schedule,
+        count: schedule.length,
+      });
     } catch (error) {
       next(error);
     }
@@ -69,10 +78,20 @@ export class ScheduleController {
   async reshuffleSchedule(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const userId = req.user!.userId;
-      const { energyLevel } = req.body;
+      const { energyLevel, date } = req.body;
+      const scheduleDate = date ? new Date(date) : new Date();
 
-      // Reshuffle logic based on new energy level
-      res.json({ message: 'Schedule reshuffled successfully' });
+      const newSchedule = await scheduleGenerator.reshuffleSchedule(
+        userId,
+        energyLevel,
+        scheduleDate
+      );
+
+      res.json({
+        message: 'Schedule reshuffled successfully based on your current energy',
+        schedule: newSchedule,
+        count: newSchedule.length,
+      });
     } catch (error) {
       next(error);
     }

@@ -31,9 +31,9 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gradient">Your Dashboard</h1>
         <p className="mt-2 text-gray-600 dark:text-gray-400">
-          Welcome back! Here's an overview of your productivity.
+          Your energy. Your rhythm. In sync.
         </p>
       </div>
 
@@ -114,38 +114,38 @@ export default function DashboardPage() {
       <StreakCard currentStreak={5} longestStreak={12} totalDays={45} />
 
       {/* Quick Actions */}
-      <Card>
+      <Card className="shadow-soft">
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
-          <CardDescription>Get started with FlowSync</CardDescription>
+          <CardDescription>What would you like to do?</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link href="/dashboard/mood">
-            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2">
+            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2 hover:border-electric-blue transition-colors">
               <Activity className="h-6 w-6" />
               <div className="text-center">
-                <div className="font-medium">Check Your Mood</div>
-                <div className="text-xs text-gray-500">Tell us how you're feeling</div>
+                <div className="font-medium">Check Your Energy</div>
+                <div className="text-xs text-gray-500">How are you feeling right now?</div>
               </div>
             </Button>
           </Link>
 
           <Link href="/dashboard/tasks">
-            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2">
+            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2 hover:border-electric-blue transition-colors">
               <CheckSquare className="h-6 w-6" />
               <div className="text-center">
-                <div className="font-medium">Create a Task</div>
-                <div className="text-xs text-gray-500">Add something to your list</div>
+                <div className="font-medium">Manage Tasks</div>
+                <div className="text-xs text-gray-500">Plan what matters</div>
               </div>
             </Button>
           </Link>
 
           <Link href="/dashboard/flow">
-            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2">
+            <Button variant="outline" className="w-full h-auto py-6 flex flex-col items-center gap-2 hover:border-electric-blue transition-colors">
               <Zap className="h-6 w-6" />
               <div className="text-center">
                 <div className="font-medium">Start Flow Block</div>
-                <div className="text-xs text-gray-500">Begin a focused session</div>
+                <div className="text-xs text-gray-500">Find your focus</div>
               </div>
             </Button>
           </Link>
@@ -153,20 +153,20 @@ export default function DashboardPage() {
       </Card>
 
       {/* AI Coach Insight */}
-      <Card className="border-2 border-yellow-200 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20">
+      <Card className="border-2 border-purple-aura/30 dark:border-purple-aura/50 bg-gradient-to-br from-light-glow to-purple-aura/10 dark:from-purple-aura/10 dark:to-purple-aura/20 shadow-soft">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-900 dark:text-yellow-300">
+          <CardTitle className="flex items-center gap-2 text-purple-aura dark:text-purple-aura">
             <Sparkles className="h-5 w-5" />
-            Daily Tip
+            Daily Insight
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-700 dark:text-gray-300">
-            {dailyTip || 'Start tracking your energy levels to get personalized productivity insights!'}
+            {dailyTip || 'Track your energy to discover your natural rhythm and work at your best.'}
           </p>
           <Link href="/dashboard/coach">
-            <Button variant="ghost" className="mt-4">
-              View All Insights →
+            <Button variant="ghost" className="mt-4 text-purple-aura hover:text-purple-aura/80">
+              Explore insights →
             </Button>
           </Link>
         </CardContent>

@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { FlowSyncWordmark } from '@/components/brand/FlowLoopLogo';
 
 export default function RegisterPage() {
   const { register, isLoading, error } = useAuth();
@@ -63,17 +64,22 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center gradient-primary animate-gradient px-4 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse-slow" />
+      </div>
+
+      <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">FlowSync</h1>
-          <p className="text-gray-600">Create your account</p>
+          <FlowSyncWordmark size="lg" className="justify-center text-white mb-4" />
         </div>
 
-        <Card>
+        <Card className="shadow-soft-lg">
           <CardHeader>
-            <CardTitle>Sign Up</CardTitle>
-            <CardDescription>Get started with FlowSync today</CardDescription>
+            <CardTitle>Start your journey</CardTitle>
+            <CardDescription>Find your rhythm. Build your flow.</CardDescription>
           </CardHeader>
 
           <form onSubmit={handleSubmit}>
@@ -135,9 +141,9 @@ export default function RegisterPage() {
                 {isLoading ? 'Creating account...' : 'Create Account'}
               </Button>
 
-              <p className="text-sm text-center text-gray-600">
+              <p className="text-sm text-center text-muted-foreground">
                 Already have an account?{' '}
-                <Link href="/login" className="text-blue-600 hover:underline font-medium">
+                <Link href="/login" className="text-primary hover:underline font-medium">
                   Log in
                 </Link>
               </p>
@@ -146,7 +152,7 @@ export default function RegisterPage() {
         </Card>
 
         <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
+          <Link href="/" className="text-sm text-white/80 hover:text-white transition-colors">
             ← Back to home
           </Link>
         </div>
