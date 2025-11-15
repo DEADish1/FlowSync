@@ -4,48 +4,59 @@
 
 @layer base {
   :root {
+    /* FlowSync Brand Colors - Energy Gradient Palette */
+    --electric-blue: 217 100% 59%; /* #2E7CFF */
+    --purple-aura: 263 100% 71%; /* #A16CFF */
+    --midnight-black: 225 45% 7%; /* #0B0F1A */
+    --light-glow: 217 100% 97%; /* #EAF2FF */
+
+    /* Semantic Color Mappings */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 225 45% 7%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 45% 7%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 225 45% 7%;
+    --primary: 217 100% 59%; /* Electric Blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 100% 97%; /* Light Glow */
+    --secondary-foreground: 225 45% 7%;
+    --muted: 217 100% 97%;
+    --muted-foreground: 225 20% 40%;
+    --accent: 263 100% 71%; /* Purple Aura */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 50% 90%;
+    --input: 217 50% 90%;
+    --ring: 217 100% 59%;
+    --radius: 0.75rem; /* Slightly more rounded for brand */
+
+    /* Gradient stops */
+    --gradient-start: 217 100% 59%; /* Electric Blue */
+    --gradient-end: 263 100% 71%; /* Purple Aura */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --background: 225 45% 7%; /* Midnight Black */
+    --foreground: 217 100% 97%;
+    --card: 225 45% 10%;
+    --card-foreground: 217 100% 97%;
+    --popover: 225 45% 10%;
+    --popover-foreground: 217 100% 97%;
+    --primary: 217 100% 59%; /* Electric Blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 45% 15%;
+    --secondary-foreground: 217 100% 97%;
+    --muted: 225 45% 15%;
+    --muted-foreground: 217 50% 70%;
+    --accent: 263 100% 71%; /* Purple Aura */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 225 30% 20%;
+    --input: 225 30% 20%;
+    --ring: 263 100% 71%;
   }
 }
 
@@ -55,5 +66,106 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* FlowSync Brand Gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
+  }
+
+  .gradient-primary-hover {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
+    transition: all 0.3s ease;
+  }
+
+  .gradient-primary-hover:hover {
+    background: linear-gradient(135deg, hsl(var(--gradient-end)) 0%, hsl(var(--gradient-start)) 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow Effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsla(var(--electric-blue), 0.3);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px hsla(var(--purple-aura), 0.3);
+  }
+
+  /* Soft Shadows (for cards) */
+  .shadow-soft {
+    box-shadow:
+      0 2px 8px -2px hsla(var(--electric-blue), 0.08),
+      0 4px 16px -4px hsla(var(--electric-blue), 0.06);
+  }
+
+  .shadow-soft-lg {
+    box-shadow:
+      0 4px 16px -4px hsla(var(--electric-blue), 0.1),
+      0 8px 24px -8px hsla(var(--electric-blue), 0.08);
+  }
+
+  /* Animations */
+  .animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-gradient {
+    animation: gradient-shift 8s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .animate-flow-loop {
+    animation: flow-loop 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes flow-loop {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: rotate(180deg) scale(1.05);
+      opacity: 1;
+    }
+  }
+
+  /* Breathable layout helpers */
+  .section-spacing {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .container-breathe {
+    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
   }
 }

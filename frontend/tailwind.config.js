@@ -17,6 +17,13 @@ module.exports = {
     },
     extend: {
       colors: {
+        // FlowSync Brand Colors
+        'electric-blue': 'hsl(var(--electric-blue))',
+        'purple-aura': 'hsl(var(--purple-aura))',
+        'midnight-black': 'hsl(var(--midnight-black))',
+        'light-glow': 'hsl(var(--light-glow))',
+
+        // Semantic Colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -24,7 +31,7 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--foreground))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

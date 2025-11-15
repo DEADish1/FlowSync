@@ -16,6 +16,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { FlowSyncWordmark } from '@/components/brand/FlowLoopLogo';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -33,11 +34,12 @@ export function Sidebar() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="flex flex-col h-full bg-gray-900 text-white w-64">
+    <div className="flex flex-col h-full bg-midnight-black text-white w-64 border-r border-gray-800">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-gray-800">
-        <h1 className="text-2xl font-bold">FlowSync</h1>
-        <p className="text-sm text-gray-400 mt-1">Manage your energy</p>
+        <Link href="/dashboard">
+          <FlowSyncWordmark size="sm" className="text-white" />
+        </Link>
       </div>
 
       {/* Navigation */}
