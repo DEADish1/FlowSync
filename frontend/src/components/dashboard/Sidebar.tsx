@@ -12,6 +12,7 @@ import {
   Zap,
   Music,
   Sparkles,
+  Plug2,
   Settings,
   LogOut,
 } from 'lucide-react';
@@ -27,6 +28,7 @@ const navigation = [
   { name: 'Flow Blocks', href: '/dashboard/flow', icon: Zap },
   { name: 'Music', href: '/dashboard/music', icon: Music },
   { name: 'AI Coach', href: '/dashboard/coach', icon: Sparkles },
+  { name: 'Integrations', href: '/dashboard/integrations', icon: Plug2 },
 ];
 
 export function Sidebar() {

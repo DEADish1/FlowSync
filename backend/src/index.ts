@@ -17,6 +17,8 @@ import musicRoutes from './routes/music';
 import flowBlockRoutes from './routes/flowBlocks';
 import analyticsRoutes from './routes/analytics';
 import coachRoutes from './routes/coach';
+import notificationRoutes from './routes/notifications';
+import exportRoutes from './routes/export';
 
 const app: Express = express();
 
@@ -57,6 +59,8 @@ app.use('/api/music', musicRoutes);
 app.use('/api/flow-blocks', flowBlockRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/coach', coachRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/export', exportRoutes);
 
 // Error handling
 app.use(notFoundHandler);

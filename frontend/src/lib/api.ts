@@ -103,3 +103,17 @@ export const coachAPI = {
   breakdownTask: (title: string, description?: string) =>
     api.post('/coach/breakdown', { title, description }),
 };
+
+// Notifications API
+export const notificationsAPI = {
+  getNotifications: (params?: { unreadOnly?: boolean; type?: string; limit?: number; offset?: number }) =>
+    api.get('/notifications', { params }),
+  getUnreadCount: () => api.get('/notifications/unread-count'),
+  markAsRead: (id: string) => api.post(`/notifications/${id}/read`),
+  markAllAsRead: () => api.post('/notifications/read-all'),
+  dismissNotification: (id: string) => api.post(`/notifications/${id}/dismiss`),
+  deleteNotification: (id: string) => api.delete(`/notifications/${id}`),
+  subscribeToPush: (subscription: any) => api.post('/notifications/subscribe', subscription),
+  unsubscribeFromPush: (endpoint: string) => api.post('/notifications/unsubscribe', { endpoint }),
+  sendTest: () => api.post('/notifications/test'),
+};
